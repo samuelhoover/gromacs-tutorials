@@ -1,0 +1,52 @@
+# This file was created Fri Jan 19 16:44:04 2024
+# Created by:
+#                       :-) GROMACS - gmx rmsf, 2023.2 (-:
+# 
+# Executable:   /usr/local/gromacs/bin/gmx
+# Data prefix:  /usr/local/gromacs
+# Working dir:  /Users/samhoover/md/tutorials/gromacs/compchems/villin/MD
+# Command line:
+#   gmx rmsf -f md.xtc -s md.tpr -o rmsf.xvg -res
+# gmx rmsf is part of G R O M A C S:
+#
+# Gromacs Runs One Microsecond At Cannonball Speeds
+#
+@    title "RMS fluctuation"
+@    xaxis  label "Residue"
+@    yaxis  label "(nm)"
+@TYPE xy
+   42   0.1909
+   43   0.1063
+   44   0.0652
+   45   0.0929
+   46   0.0742
+   47   0.0604
+   48   0.0655
+   49   0.0724
+   50   0.0627
+   51   0.0714
+   52   0.0779
+   53   0.0487
+   54   0.0509
+   55   0.0530
+   56   0.0609
+   57   0.0479
+   58   0.0435
+   59   0.0588
+   60   0.0549
+   61   0.0423
+   62   0.0502
+   63   0.0581
+   64   0.0593
+   65   0.0427
+   66   0.0351
+   67   0.0439
+   68   0.0509
+   69   0.0468
+   70   0.0398
+   71   0.0495
+   72   0.0613
+   73   0.0681
+   74   0.0804
+   75   0.0877
+   76   0.1592

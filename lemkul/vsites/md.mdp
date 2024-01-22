@@ -1,0 +1,24 @@
+; Parameters describing what to do, when to stop and what to save
+integrator	    = md        ; leap-frog integrator		
+nsteps		    = 50000	  	; Maximum number of steps to perform
+dt              = 0.002     ; 2 fs * 50000 steps = 100 ps
+
+; output
+nstxout         = 500
+
+; temperature coupling
+tcoupl          = V-rescale 
+tc_grps         = System
+tau_t           = 0.1
+ref_t           = 298
+
+gen_vel         = yes
+gen_temp        = 298
+gen_seed        = -1 
+
+; Settings below are for the all-vs-all kernels
+cutoff-scheme   = Verlet
+nstlist		    = 10		    ; Fixed neighbor list
+coulombtype	    = PME 
+pbc		        = xyz 		; Non-periodic system 
+comm-mode       = angular

@@ -1,0 +1,37 @@
+# This file was created Mon Jan  8 11:06:09 2024
+# Created by:
+#                       :-) GROMACS - gmx bar, 2023.2 (-:
+# 
+# Executable:   /usr/local/gromacs/bin/gmx
+# Data prefix:  /usr/local/gromacs
+# Working dir:  /Users/samhoover/molecular-dynamics/proteins/tutorials/solvation
+# Command line:
+#   gmx bar -f Lambda_0/Production_MD/md0.xvg Lambda_1/Production_MD/md1.xvg Lambda_10/Production_MD/md10.xvg Lambda_11/Production_MD/md11.xvg Lambda_12/Production_MD/md12.xvg Lambda_13/Production_MD/md13.xvg Lambda_14/Production_MD/md14.xvg Lambda_15/Production_MD/md15.xvg Lambda_16/Production_MD/md16.xvg Lambda_17/Production_MD/md17.xvg Lambda_18/Production_MD/md18.xvg Lambda_19/Production_MD/md19.xvg Lambda_2/Production_MD/md2.xvg Lambda_20/Production_MD/md20.xvg Lambda_3/Production_MD/md3.xvg Lambda_4/Production_MD/md4.xvg Lambda_5/Production_MD/md5.xvg Lambda_6/Production_MD/md6.xvg Lambda_7/Production_MD/md7.xvg Lambda_8/Production_MD/md8.xvg Lambda_9/Production_MD/md9.xvg -o -oi
+# gmx bar is part of G R O M A C S:
+#
+# Gravel Rubs Often Many Awfully Cauterized Sores
+#
+@    title "Free energy differences"
+@    xaxis  label "\xl\f{}"
+@    yaxis  label "\xD\f{}G (kT)"
+@TYPE xydy
+ 0.500  0.08  0.00
+ 1.500  0.07  0.00
+ 2.500  0.06  0.00
+ 3.500  0.04  0.00
+ 4.500  0.02  0.00
+ 5.500  0.00  0.00
+ 6.500 -0.03  0.00
+ 7.500 -0.07  0.00
+ 8.500 -0.10  0.00
+ 9.500 -0.16  0.00
+10.500 -0.23  0.01
+11.500 -0.33  0.01
+12.500 -0.45  0.02
+13.500 -0.59  0.01
+14.500 -0.61  0.01
+15.500 -0.52  0.01
+16.500 -0.41  0.00
+17.500 -0.28  0.00
+18.500 -0.16  0.00
+19.500 -0.05  0.00
