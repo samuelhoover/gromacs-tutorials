@@ -1,5 +1,7 @@
-./lemkul/lysozyme/NPT/npt.trr
-./lemkul/complex/MD/md_0_10_noPBC.xtc
-./lemkul/complex/MD/md_0_10.xtc
-./lemkul/umbrella/pull.xtc
-./lemkul/umbrella/pull.trr
+lemkul/umbrella/conf*
+lemkul/solvation/Lambda_*
+**/frame*run-umbrella.sh
+**/*.xtc
+**/*.trr
+**/*.cpt
+**/*.edr
