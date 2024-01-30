@@ -1,0 +1,79 @@
+; NVT EQUILIBRATION RUN
+; (used as input into grompp to generate nvt_1.tpr)
+;
+define          =  -DPOSRES -DPOSRES_FC_BB=1000.0 -DPOSRES_FC_SC=500.0 -DPOSRES_FC_LIPID=250.0     ; position restrain the protein
+;
+;  RUN PARAMETERS
+integrator      = md            ; leap-frog integrator
+nsteps          = 500000      ; 2 * 500 000 (fs)  = 2 * 0.5 (ns) = 1ns 
+dt              = 0.002         ; 2 fs
+;
+;  OUTPUT CONTROL
+; Output frequency for coords (x), velocities (v) and forces (f) = *.trr
+;
+nstxout             =  25000000   ; [steps] save coordinates every 50 ns
+nstvout             =  25000000   ; [steps] write velocities every 50 ns
+nstfout             =  25000000   ; [steps] write forces every 50 ns
+;
+; Output frequency for coordinates = *.xtc
+;
+nstxout-compressed  = 10000      ;  [steps] save position coordinates every 10.0 ps
+compressed-x-grps   = System
+;
+; Output frequency for energies to log and energy file = *.log and *.edr
+;
+nstlog              =  500    ; [steps] update log file every 1.0 ps
+nstenergy           =  500    ; [steps] save energies every 1.0 ps
+energygrps          =  System
+;
+; BOND PARAMETERS
+continuation            = no            ; first dynamics run
+constraint_algorithm    = lincs         ; holonomic constraints
+constraints             = all-bonds     ; all bonds (even heavy atom-H bonds) constrained
+lincs_iter              = 1             ; accuracy of LINCS
+lincs_order             = 4             ; also related to accuracy
+;
+;  NEIGHBOR SEARCHING
+;
+cutoff-scheme       =  Verlet ; Generate a pair list with buffering (other option group)
+nstlist             =  5      ; Frequency to update neighbor list and long range forces,
+rlist               =  1.0    ; [nm] short-range neighbour list cuttoff
+;
+;  ELECTROSTATICS AND VdWAALS
+;
+coulombtype         =  PME
+pme_order           =  4                        ; cubic interpolation (other options available)
+vdwtype             =  Cut-off
+vdw-modifier        =  Potential-shift-Verlet  ; elects Potential-shift with the Verlet cutoff-scheme, as it is (nearly) free
+rcoulomb            =  1.2                      ; [nm] distance for the coulomb cut-off
+rvdw                =  1.2                      ; [nm] distance for the vdw cut-off
+epsilon_r           =  1                        ; The relative dielectric constant( 0=infinity)
+fourierspacing      =  0.16                     ; grid spacing for FFT
+;
+; TEMPERATURE COUPLING (is on)
+tcoupl          = berendsen                  ; modified Berendsen thermostat
+tc-grps         = Protein_membrane solvent   ; two coupling groups - obligatory
+tau_t           = 0.1     0.1                ; time constant, in ps
+ref_t           = 310     310                ; reference temperature, one for each group, in K
+;
+; PRESSURE COUPLING  (is off in NVT)
+pcoupl          = no            ; no pressure coupling in NVT
+;
+; PERIODIC BOUNDARY CONDITIONS
+pbc             = xyz           ; 3-dimensional PBC
+;
+; DISPERSION CORRECTION
+DispCorr        = EnerPres      ; Apply long range dispersion corrections for E and P
+;
+; VELOCITY GENERATION
+gen_vel         = no            ; assign velocities from Maxwell distribution
+;gen_temp        = 310           ; temperature for Maxwell distribution
+;gen_seed        = -1            ; generate a random seed
+;
+; CENTER OF MASS (COM) MOTION REMOVAL
+; to prevent drifting of the protein-bilayer in the opposite direction as water-ions
+;
+nstcomm   = 1
+comm-mode = linear
+comm-grps = Protein_membrane solvent
+

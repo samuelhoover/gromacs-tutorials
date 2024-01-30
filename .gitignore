@@ -1,7 +1,9 @@
 lemkul/umbrella/conf*
 lemkul/solvation/Lambda_*
+compchems/membrane/charmm-gui*
 **/frame*run-umbrella.sh
 **/*.xtc
 **/*.trr
 **/*.cpt
 **/*.edr
+**/#*#

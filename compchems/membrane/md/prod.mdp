@@ -1,0 +1,77 @@
+; MD PRODUCTION RUN
+; (used as input into grompp to generate md.tpr)
+;
+;  RUN PARAMETERS
+integrator      = md            ; leap-frog integrator
+nsteps          = 10000000      ; 1 * 10 000 000 = 10 000 ps = 10 ns 
+dt              = 0.001         ; 1 fs
+;
+;  OUTPUT CONTROL
+; Output frequency for coords (x), velocities (v) and forces (f) = *.trr
+;
+nstxout         = 50000000  ; [steps] save coordinates every 100 ns 
+nstvout         = 50000000  ; [steps] write velocities every 100 ns 
+nstfout         = 50000000  ; [steps] write forces every 100 ns 
+;
+; Output frequency for coordinates = *.xtc
+;
+nstxout-compressed  = 10000    ;  [steps] save position coordinates every 10 ps
+compressed-x-grps   = System
+;
+; Output frequency for energies to log and energy file = *.log and *.edr
+;
+nstlog              =  5000    ; [steps] update log file every 5 ps
+nstenergy           =  5000     ; [steps] save energies every 5 ps 
+energygrps          =  System
+;
+; BOND PARAMETERS
+continuation            = yes           ; starting from the npt run
+constraint_algorithm    = lincs         ; holonomic constraints
+constraints             = all-bonds     ; constrain all bonds length
+lincs_iter              = 1             ; accuracy of LINCS
+lincs_order             = 4             ; also related to accuracy
+;
+;  NEIGHBOR SEARCHING
+;
+cutoff-scheme       =  Verlet ; Generate a pair list with buffering (other option group)
+nstlist             =  5     ; Frequency to update neighbor list and long range forces
+;
+;  ELECTROSTATICS AND VdWAALS
+;
+coulombtype         =  PME
+pme_order           =  4          ; cubic interpolation (other options available)
+rlist               =  1.2        ; [nm] short-range neighbour list cutoff
+rcoulomb            =  1.2        ; [nm] distance for the coulomb cut-off 
+rvdw                =  1.2        ; [nm] distance for the vdw cut-off 
+fourierspacing      =  0.16       ; grid spacing for FFT
+;
+; TEMPERATURE COUPLING (is on)
+tcoupl          = v-rescale                 ; more accurate for membrane simulations
+tc-grps         = Protein_membrane solvent  ; two coupling groups - more accurate
+nsttcouple      = 10                        ; [steps] frequency for coupling temperature
+tau_t           = 1.0     1.0               ; [ps] time constant for temp. coupling
+ref_t           = 310     310               ; [K] reference temperature, one for each group
+;
+; PRESSURE COUPLING  (is on in MD production run)
+pcoupl              = c-rescale          ; Pressure coupling on 
+pcoupltype          = semiisotropic      ; uniform scaling (isotropic) not appropriate for membranes
+nstpcouple          = 10                 ; [steps] frequency for coupling pressure
+tau_p               = 5.0                ; [ps] time constant for pressure coupling
+ref_p               = 1.0     1.0        ; [bar] reference pressure
+compressibility     = 4.5e-5  4.5e-5     ; [bar^-1] isothermal compressibility
+;
+; PERIODIC BOUNDARY CONDITIONS 
+pbc             = xyz           ; 3-D PBC
+;
+; DISPERSION CORRECTION 
+DispCorr        = EnerPres      ; apply long range dispersion corrections for Energy and Pressure 
+;
+; VELOCITY GENERATION is off
+gen_vel         = no       ; we start from velocities generated in npt run 
+;
+; CENTER OF MASS (COM) MOTION REMOVAL
+; to prevent drifting of the protein-bilayer in opposite direction as water-ions
+; 
+nstcomm   = 1
+comm-mode = linear
+comm-grps = Protein_membrane solvent 
