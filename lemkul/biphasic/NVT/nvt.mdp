@@ -1,0 +1,47 @@
+title		    = Biphasic system NVT equilibration	; Title of run
+
+; Run parameters
+integrator	    = md		; leap-frog integrator
+nsteps		    = 50000	  	; 2 * 50 000 = 100 000 fs = 100 ps
+dt            = 0.002     ; 2 fs
+
+; Output control
+nstxout = 500
+nstvout = 500
+nstenergy = 500
+nstlog = 500
+
+; Bond parameters
+continuation = no
+
+; Nonbonded settings
+cutoff-scheme = Verlet
+ns_type = grid
+nstlist = 10
+rlist = 1.2
+vdwtype = cutoff
+vdw-modifier = force-switch
+rvdw-switch = 1.0
+rvdw = 1.2
+DispCorr = EnerPres
+
+; Electrostatics
+coulombtype = Cut-off
+rcoulomb = 1.2
+
+; Temperature coupling
+tc-grps = system
+tcoupl = V-rescale
+tau_t = 0.1
+ref_t = 298
+
+; Pressure coupling
+pcoupl = No
+
+; PBC
+pbc = xyz
+
+; Velocity generation
+gen_vel = yes
+gen_temp = 298
+gen_seed = -1
